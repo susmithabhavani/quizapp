@@ -1,24 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import {useState} from "react"
+import HomePage from "./HomePage";
+import { Question } from "./Question";
+import { Result } from "./Result";
 
-function App() {
+import {createContext} from "react"
+
+// useState() --> If we want to store any data --> react module(classes, functions
+// , variables)
+
+
+export const myBasket = createContext();
+
+function App() 
+{
+    // 2 details, 1 = variableName, 2 = functionName
+    const [currentData, setCurrentData] = useState("homepage");
+    // currentData = "question"
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+   <div>
+
+    <myBasket.Provider  value={  { data : setCurrentData }  }>
+          { currentData == "homepage" && <HomePage/> }
+    </myBasket.Provider>
+     
+     { currentData == "question" && <Question/> }
+     { currentData == "result" && <Result/> }
+
+   </div>
   );
 }
 
